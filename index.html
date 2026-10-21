@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embodiment and LLM Agents: Evidence Database</title>
+  <meta name="description" content="Primary studies comparing embodied and non-embodied LLM agents on human perception, plus the motivation research behind a future-self app.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="shell">
+
+    <header class="hero">
+      <div class="eyebrow">Evidence map · Interactive database</div>
+      <h1>Embodiment and LLM agents: what we have found</h1>
+      <p class="lede">
+        Primary studies that compare embodied and non-embodied LLM agents on how people perceive them,
+        and the motivation research behind our future-self app. A companion to the
+        <a id="review-link" href="https://danhuazhang.github.io/3d-xr-embodied-agent-review/">3D/XR Embodied Agent Review Database</a>,
+        which collects the review-level literature.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill">Updated <strong id="updated">—</strong></span>
+        <span class="meta-pill">Targeted search, not yet a full database run</span>
+        <span class="meta-pill">Citation counts: <strong id="cite-status">OpenAlex, on request</strong></span>
+      </div>
+    </header>
+
+    <section class="stats" id="stats" aria-label="Summary counts"></section>
+
+    <section class="findings" aria-labelledby="findings-title">
+      <h2 class="section-title" id="findings-title">What we have found so far</h2>
+      <div class="finding-grid">
+        <article class="finding">
+          <span class="tag direct">Direct comparisons</span>
+          <h3>Five studies, all small and single-session</h3>
+          <p>Five LLM studies compare an agent with a visible face or body against text or voice. Each ran one session with 20 to 92 people.</p>
+        </article>
+        <article class="finding">
+          <span class="tag direct">Direct comparisons</span>
+          <h3>Engagement moves; judgments mostly do not</h3>
+          <p>The embodied agent won on engagement or answer length in two studies and on preference in a third, but never on perceived competence, satisfaction or trust. In one, the text agent was rated more competent.</p>
+        </article>
+        <article class="finding">
+          <span class="tag direct">Direct comparisons</span>
+          <h3>Few comparisons isolate the body</h3>
+          <p>Only two keep the voice the same while adding a body or face. The other three also change voice, task or immersion, so the effect of the body itself is confounded.</p>
+        </article>
+        <article class="finding">
+          <span class="tag direct">Direct comparisons</span>
+          <h3>Delay and uncanniness keep coming up</h3>
+          <p>Three of the five report complaints about response latency, lip-sync or an uncanny avatar, which may cancel out what the body adds.</p>
+        </article>
+        <article class="finding">
+          <span class="tag mechanism">Mechanism studies</span>
+          <h3>Nonverbal behaviour changes what words mean</h3>
+          <p>Nonverbal cues that contradict speech change how the words are read, and embodied cues can raise trust in an agent’s hallucination warnings.</p>
+        </article>
+        <article class="finding">
+          <span class="tag theme">Motivation</span>
+          <h3>For weeks-long goals, eager framing looks safer than fear</h3>
+          <p>Fear messages work on average but least for repeated behaviours, and avoidance goals drain self-regulation over a month. Future-self app effects faded within months.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="database" aria-labelledby="db-title">
+      <div class="db-titlebar">
+        <h2 id="db-title">Primary studies</h2>
+        <div class="view-tabs" role="tablist" aria-label="Dataset">
+          <button class="view-tab active" role="tab" aria-selected="true" data-set="studies">Primary studies</button>
+          <button class="view-tab" role="tab" aria-selected="false" data-set="motivation">Motivation and future self</button>
+          <span class="view-sep" aria-hidden="true"></span>
+          <button class="view-tab" id="expand-all" aria-pressed="false">Expand all details</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="sr-only" for="q">Search</label>
+        <input id="q" class="control" type="search" placeholder="Search title, author, venue or finding" autocomplete="off">
+
+        <div class="year-range">
+          <div class="range-heading">
+            <span>Publication years</span>
+            <output id="year-label">All years</output>
+          </div>
+          <div class="range-slider">
+            <div class="range-track"></div>
+            <div class="range-fill" id="range-fill"></div>
+            <input id="year-min" type="range" aria-label="Earliest publication year">
+            <input id="year-max" type="range" aria-label="Latest publication year">
+          </div>
+        </div>
+
+        <label class="sr-only" for="group">Group</label>
+        <select id="group" class="control"></select>
+
+        <label class="sr-only" for="status">Reading status</label>
+        <select id="status" class="control"></select>
+      </div>
+
+      <div class="toolbar-secondary">
+        <span id="count" aria-live="polite"></span>
+        <div class="toolbar-actions">
+          <button class="tiny-button" id="refresh">↻ Refresh citations</button>
+          <button class="tiny-button" id="export">↓ Export visible CSV</button>
+          <button class="tiny-button" id="reset">× Reset filters</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="paper-table">
+          <thead id="thead"></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide">
+      <div class="guide-card">
+        <h2>Next steps</h2>
+        <ol>
+          <li>Screen the eight candidate studies and move each into a group or out of scope.</li>
+          <li>Code actual and disclosed control for every study, following the review database’s scheme.</li>
+          <li>Citation-chase records 1, 24, 50, 84 and 88 of the review database. Record 50, Yee, Bailenson and Rickertsen’s 2007 meta-analysis of human-like faces, is the one prior synthesis of face vs no face.</li>
+          <li>Run the full searches in Scopus, Web of Science, ACM DL, IEEE Xplore, PsycINFO, ERIC, PubMed and ProQuest, and log the counts for PRISMA-ScR.</li>
+          <li>Check the records marked Verify or Summary only against their full texts.</li>
+        </ol>
+      </div>
+      <div class="guide-card">
+        <h2>How records were found</h2>
+        <p>Records come from targeted web, publisher and arXiv searches up to the update date, seeded from the review database and from citation chasing.</p>
+        <p>Findings are summarised from each paper’s abstract or full text as available. Records marked To screen have not been read yet.</p>
+        <p>Groups follow the review database: direct comparisons of an embodied and a non-embodied agent, mechanism studies within embodied agents, and a robot strand kept for future work.</p>
+      </div>
+    </section>
+
+    <footer>
+      Last updated <span id="footer-updated">—</span> ·
+      Companion to the <a href="https://danhuazhang.github.io/3d-xr-embodied-agent-review/">3D/XR Embodied Agent Review Database</a>
+    </footer>
+  </div>
+
+  <script src="data/records.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
